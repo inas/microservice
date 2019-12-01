@@ -8,8 +8,7 @@ db = Redis(host='redis', port=6379)
 @app.route('/')
 def hello_world():
     db.flushdb()
-    return 'RESET Count is %s.' % db.get('count')
-
+    return 'Reset voting. Number of candidates is now: %s' % db.dbsize()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5003, debug=True)

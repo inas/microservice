@@ -1,4 +1,7 @@
-from flask import Flask
+import json
+
+import requests
+from flask import Flask, make_response
 from redis import Redis
 
 app = Flask(__name__)
@@ -6,8 +9,16 @@ db = Redis(host='redis', port=6379)
 
 
 @app.route('/')
-def hello_world():
-    return 'RESET Count is %s.' % db.get('count')
+def get_leaderboard():
+    header_content = {'Content-type': 'application/json'}
+    response = requests.get("http://192.168.0.8:5000/", headers=header_content).json()
+    result = {}
+    for key in sorted(response, key=lambda k: len(response[k]), reverse=True)[:10]:
+        result[key] = db.llen(key) - 1
+
+    response = make_response(json.dumps(result, indent=4))
+    response.headers['Content-type'] = "application/json"
+    return response
 
 
 if __name__ == "__main__":
