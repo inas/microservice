@@ -13,7 +13,7 @@ see candidates leaderboard:
 http://0.0.0.0:5002/
 
 vote for candidat: ex voter1 vote for candidate1:
-http://0.0.0.0:5000/candidate1/voter1
+http://0.0.0.0:5001/candidate1/voter1
 
 reset voting, remove all candidates:
 http://0.0.0.0:5003/
