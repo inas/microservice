@@ -8,10 +8,8 @@ services:
       - "5000:5000"
     volumes:
       - ./candidates:/code
-    depends_on:
+    links:
       - redis
-    networks:
-      - lognet
   vote:
     build:
       context: vote
@@ -20,10 +18,8 @@ services:
       - "5001:5001"
     volumes:
       - ./vote:/code
-    depends_on:
+    links:
       - redis
-    networks:
-      - lognet
   leaderboard:
     build:
       context: leaderboard
@@ -32,10 +28,8 @@ services:
       - "5002:5002"
     volumes:
       - ./leaderboard:/code
-    depends_on:
+    links:
       - redis
-    networks:
-      - lognet
   reset:
     build:
       context: reset
@@ -44,16 +38,7 @@ services:
       - "5003:5003"
     volumes:
       - ./reset:/code
-    depends_on:
+    links:
       - redis
-    networks:
-      - lognet
   redis:
     image: redis
-    ports:
-      - "6379:6379"
-    networks:
-      - lognet
-networks:
-  lognet:
-    driver: bridge
