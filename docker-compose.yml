@@ -4,6 +4,8 @@ services:
     build:
       context: candidates
       dockerfile: Dockerfile
+    expose:
+      - "5000"
     ports:
       - "5000:5000"
     volumes:
@@ -22,6 +24,7 @@ services:
       - ./vote:/code
     depends_on:
       - redis
+      - candidates
     networks:
       - lognet
   leaderboard:
@@ -34,6 +37,7 @@ services:
       - ./leaderboard:/code
     depends_on:
       - redis
+      - candidates
     networks:
       - lognet
   reset:

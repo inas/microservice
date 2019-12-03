@@ -11,7 +11,7 @@ db = Redis(host='redis', port=6379)
 @app.route('/')
 def get_leaderboard():
     header_content = {'Content-type': 'application/json'}
-    response = requests.get("http://192.168.0.5:5000/", headers=header_content).json()
+    response = requests.get("http://candidates:5000/", headers=header_content).json()
     result = {}
     for key in sorted(response, key=lambda k: len(response[k]), reverse=True)[:10]:
         result[key] = db.llen(key) - 1
