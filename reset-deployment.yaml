@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.19.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: reset
+  name: reset
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.19.0 ()
+      creationTimestamp: null
+      labels:
+        io.kompose.service: reset
+    spec:
+      containers:
+        - image: anishainas/reset:latest
+          name: reset
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5003
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 200m
+      restartPolicy: Always
+
+status: {}

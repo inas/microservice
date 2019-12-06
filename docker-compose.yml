@@ -4,12 +4,9 @@ services:
     build:
       context: candidates
       dockerfile: Dockerfile
-    expose:
-      - "5000"
+    image: anishainas/candidates:latest
     ports:
       - "5000:5000"
-    volumes:
-      - ./candidates:/code
     depends_on:
       - redis
     networks:
@@ -18,10 +15,9 @@ services:
     build:
       context: vote
       dockerfile: Dockerfile
+    image: anishainas/vote:latest
     ports:
       - "5001:5001"
-    volumes:
-      - ./vote:/code
     depends_on:
       - redis
       - candidates
@@ -33,8 +29,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5002:5002"
-    volumes:
-      - ./leaderboard:/code
     depends_on:
       - redis
       - candidates
@@ -44,10 +38,9 @@ services:
     build:
       context: reset
       dockerfile: Dockerfile
+    image: anishainas/reset:latest
     ports:
       - "5003:5003"
-    volumes:
-      - ./reset:/code
     depends_on:
       - redis
     networks:
