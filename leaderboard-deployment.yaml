@@ -21,10 +21,16 @@ spec:
         io.kompose.service: leaderboard
     spec:
       containers:
-        - image: leaderboard
+        - image: anishainas/leaderboard:latest
           name: leaderboard
+          imagePullPolicy: Never
           ports:
             - containerPort: 5002
-          resources: {}
+          resources:
+            requests:
+              cpu: 200m
+            limits:
+              cpu: 300m
       restartPolicy: Always
+
 status: {}

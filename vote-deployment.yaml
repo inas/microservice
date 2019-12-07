@@ -23,8 +23,14 @@ spec:
       containers:
         - image: anishainas/vote:latest
           name: vote
+          imagePullPolicy: Never
           ports:
             - containerPort: 5001
-          resources: {}
+          resources:
+            requests:
+              cpu: 200m
+            limits:
+              cpu: 300m
       restartPolicy: Always
+
 status: {}
